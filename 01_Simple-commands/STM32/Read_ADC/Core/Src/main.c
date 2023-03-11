@@ -53,9 +53,6 @@ bool cmd_received = false;
 uint8_t cmd[MAX_CMD_LEN] = {0};
 uint8_t * last_char = &cmd[MAX_CMD_LEN];
 uint8_t * p_current_char = cmd;
-bool reading_ADC = false;
-uint32_t prev_millis = 0;
-const uint32_t interval_ms = 500;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -139,32 +136,9 @@ int main(void)
     if( cmd_received )
     {
       // Process the command by comparing it to "on" and "off".
-      //    
-      if( strcmp((char*)cmd, "on") == 0 ) reading_ADC = true;
-      else if( strcmp((char*)cmd, "off") == 0 ) reading_ADC = false;
-      else
+      //   
+      if( strcmp((char*)cmd, "r") == 0 )
       {
-        uint8_t error_msg[] = "Unknown command\n\r";
-        HAL_UART_Transmit(&huart2, error_msg, strlen((char*)error_msg), HAL_MAX_DELAY);
-      }
-
-      // Reset variables to receive another command.
-      //
-      memset(cmd, 0, strlen((char*)cmd));
-      p_current_char = cmd;
-      cmd_received = false;
-      HAL_UART_Receive_IT(&huart2, cmd, (size_t)1);
-    }
-
-    // Non-blocking ADC read. If the "Read ADC" task is enabled and 
-    // it's been <interval_ms> since the last time we read the ADC 
-    // (<prev_millis>), then read the ADC and send it out over UART.
-    //
-    if( reading_ADC )
-    {
-      if( HAL_GetTick() - prev_millis > interval_ms )
-      {
-        prev_millis = HAL_GetTick();
         HAL_ADC_Start(&hadc1);
 
         // NOTE: This code is BLOCKING, which isn't desirable, but 
@@ -179,6 +153,18 @@ int main(void)
         buffer[MAX_ADC_VALUE_LEN-1] = '\r';
         HAL_UART_Transmit(&huart2, buffer, MAX_ADC_VALUE_LEN, HAL_MAX_DELAY);
       }
+      else
+      {
+        uint8_t error_msg[] = "Unknown command\n\r";
+        HAL_UART_Transmit(&huart2, error_msg, strlen((char*)error_msg), HAL_MAX_DELAY);
+      }
+
+      // Reset variables to receive another command.
+      //
+      memset(cmd, 0, strlen((char*)cmd));
+      p_current_char = cmd;
+      cmd_received = false;
+      HAL_UART_Receive_IT(&huart2, cmd, (size_t)1);
     }
   }
   /* USER CODE END 3 */
