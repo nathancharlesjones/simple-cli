@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-bool led_is_blinking = true;
-uint32_t prev_millis = 0;
-uint32_t on_time = 500, off_time = 500;
+static bool led_is_blinking = true;
+static uint32_t prev_millis = 0;
+static uint32_t on_time = 500, off_time = 500;
 
 int on(int argc, char *argv[])
 {
@@ -22,7 +22,7 @@ int off(int argc, char *argv[])
 	return 0;
 }
 
-void set_dc(float dc)
+static void set_dc(float dc)
 {
 	uint32_t period = on_time + off_time;
 	on_time = dc * period / 100.0;
@@ -52,7 +52,7 @@ int dc(int argc, char *argv[])
 	return 0;
 }
 
-void set_freq(float freq)
+static void set_freq(float freq)
 {
 	float old_freq = 1000.0 / ( on_time + off_time );
 
