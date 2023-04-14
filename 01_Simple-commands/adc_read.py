@@ -18,7 +18,7 @@ class MainWindow(QtWidgets.QMainWindow):
 		self.buffer_size = int(self.window_width_s*self.sampling_freq_Hz)
 
 		# Create serial object
-		self.com_port = "COM5"
+		self.com_port = "COM6"
 		self.baud_rate = 115200
 		self.cli_device = serial.Serial(self.com_port, self.baud_rate, timeout=0.5)
 
