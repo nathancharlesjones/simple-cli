@@ -1,5 +1,5 @@
 # simple-cli
- An introduction to building a simple command-line interface for an embedded system. Each of the projects shown include examples for both Arduino and the STM32 (save the two projects in "Going Further").
+An introduction to building a simple command-line interface for an embedded system. Each of the projects shown include examples for both Arduino and the STM32 (save the two projects in "Going Further").
 
 ## Read-UART
 Demonstrates how to read a string over UART and echo it back to the terminal, all while blinking an LED.
@@ -10,7 +10,7 @@ Demonstrates how to read a string over UART and echo it back to the terminal, al
 Demonstrates how to interpret single word commands such as "on" and "off" to control an LED.
 
 ### Read_ADC
-Demonstrates how to return a value when asked. Run the included PyQT script (after setting the COM port and baud rate correctly) to see a live graph of ADC values.
+Demonstrates how to return a value when asked. Run the included PyQT script (after setting the COM port and baud rate correctly) to see a live graph of ADC values  (assuming you have a potentiometer or other analog voltage signal connected to the analog pin being read in the code).
 
 ## Command-plus-value
 Demonstrates how to interpret commands that may include a numeric value. These projects allow a person to modify a blinking LED's duty cycle and frequency in addition to being able to turn it on or off.
