@@ -1,4 +1,6 @@
 # simple-cli
+Watch me present on this topic at the 2023 Embedded Online Conference [here](https://embeddedonlineconference.com/session/Building_a_Simple_Command_Line_Interface).
+
 An introduction to building a simple command-line interface for an embedded system. Each of the projects shown include examples for both Arduino and the STM32 (save the two projects in "Going Further").
 
 ## Read-UART
