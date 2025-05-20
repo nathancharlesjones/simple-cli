@@ -4,6 +4,10 @@ String command = "";
 
 void setup() {
   Serial.begin(115200);
+  pinMode(A0, OUTPUT);
+  digitalWrite(A0, LOW);
+  pinMode(A2, OUTPUT);
+  digitalWrite(A2, HIGH);
 }
 
 void loop() {
@@ -38,7 +42,7 @@ void loop() {
         // Put four-digit integer at the start of buffer, then
         // add newline and carriage return to the end.
         //
-        sprintf(buffer, "%4d", analogRead(A0));
+        sprintf(buffer, "%4d", analogRead(A1));
         buffer[MAX_ADC_VALUE_LEN-2] = '\n';
         buffer[MAX_ADC_VALUE_LEN-1] = '\r';
         
